@@ -180,11 +180,11 @@ with tab2:
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("##### 📋 Item Breakdown")
-            st.dataframe(df_pt.style.set_properties(**{'background-color': '#FFFFFF'}), use_container_width=True, height=350)
+            st.dataframe(df_pt.style.set_properties(**{'background-color': '#FFFFFF', 'color': '#000000'}), use_container_width=True, height=350)
         with col2:
             st.markdown("##### 🏪 Print Matrix Grid")
             if not df_pt.empty:
                 pivot = df_pt.pivot_table(index="COLOUR NAME", columns="PACK (L/Kg)", values="FINAL RATE (₹)", aggfunc="first").round(2).fillna("-")
-                st.dataframe(pivot.style.set_properties(**{'background-color': '#FFFDF7', 'font-weight': '600'}), use_container_width=True, height=350)
+                st.dataframe(pivot.style.format(precision=2, na_rep="-").set_properties(**{'background-color': '#FFFDF7', 'color': '#000000', 'font-weight': '600'}), use_container_width=True)
     else:
         st.info("Paint list khali hai. Admin panel se paint wali excel upload karein.")
